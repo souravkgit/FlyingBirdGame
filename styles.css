@@ -1,0 +1,135 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{width:100vw;
+    overflow:hidden;}
+.container{
+    width:100vw;
+    height:100vh;
+    color:#fff;
+    overflow:hidden;
+    text-align:center;
+    background-image: url(./Utils/front.jpg);
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-size: cover;
+    font-size: 12px;
+    -webkit-animation-fill-mode: forwards;
+    animation: backgroundScroll 5s linear infinite;
+    animation-fill-mode: forwards;
+}
+#bird {position: absolute;
+height: 15vh;
+width: 15vh;}
+
+#score{
+    color: crimson;
+    width: 100vw;
+
+    font-size: large;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.gameover{
+    display: none;
+}
+.replay{
+    cursor: pointer;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.pop{
+    width: 250px;
+    height: 200px;
+    display: initial;
+    position:absolute;
+    left:40vw;
+    top: 20vh;
+    border: solid rgb(66, 133, 209) 5px;
+    border-radius: 20px;
+    padding: 10px;
+    color: rgb(66, 133, 209);
+    font-size: xx-large;
+    font-weight: bold;
+    font-family:  cursive;
+    opacity: 70%;
+    backdrop-filter: blur(5px);
+    background-color: rgb(231, 135, 135);
+    animation: pop linear 1s 1;
+}
+.name{
+    color: black;
+    width: 100vw;
+    font-size: large;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.prof{
+    position: absolute;
+    display: flex;
+    height: auto;
+    width: 17vh;
+    flex-wrap: wrap;
+    z-index: 5;
+    right: 0vw;
+}
+
+.profile{
+      height: 15vh;
+      width: 15vh;
+      margin: auto;
+      background-size: 15vh 15vh;
+      border-radius: 40%;
+  }
+.wall{
+    width:50px;
+    height:300px;
+    position:absolute;
+    z-index: 1;
+    background-image: url("./Utils/pipe.png");
+    right:-10vw;
+}
+
+.pause{
+    visibility: hidden;
+    height: 70px;
+    width: 70px;
+    z-index: 3;
+    background-image: url('./Utils/pause.gif');
+    /* display: none; */
+    position: absolute;
+    background-size: 70px 70px;
+    top: 40vh;
+    left: 50vw;
+}
+#wall1{
+    top:0;
+    right: -110vw;
+}
+#wall2{
+    bottom:0;
+    right: -150vw;
+}
+
+.bee{
+    height: 52px;
+    width: 52px;
+    top : 50vh;
+    position:absolute;
+    right:-10vw;
+}
+
+@keyframes backgroundScroll {
+from {background-position: 0 0;}
+to {background-position: -100vw 0px;}
+
+}
+
+@keyframes pop {
+    from {transform: scale(0.2);
+    }
+    to {transform: scale(1);
+    }
+    
+    }

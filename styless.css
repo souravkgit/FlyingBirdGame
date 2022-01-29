@@ -1,0 +1,198 @@
+@import url('http://fonts.cdnfonts.com/css/scratch-2');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100vw;
+  overflow: hidden;
+}
+
+.containermain {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(./Utils/bg1.jpg);
+  background-size: 100vw 100vh;
+}
+.birdmain2 {
+height: 27vh;
+width: 27vh;
+animation: backgroundScroll2 7s linear 1;
+animation-fill-mode: forwards;
+}
+
+#birdmain2{
+  height: 30vh;
+  width: 30vh;
+  position: absolute;
+top: 38vh;
+animation: backgroundScroll2 7s linear 1;
+animation-fill-mode: forwards;
+}
+
+.birdmain {
+left: 0vw;
+position: absolute;
+height: 100%;
+width: 10%;
+}
+
+.beemain {
+right: 0vw;
+position: absolute;
+height: 100%;
+width: 10%;
+}
+.chain{
+  position: absolute;
+  width: 20px;
+  height: 50px;
+  background-image: url('./Utils/chain.png');
+  background-size:20px 50px;
+  transform-origin: 0 0;
+  animation: jhul 4s linear infinite;
+}
+
+.ins{
+  position: absolute;
+  left: 30vw;
+  top: 50px;
+  background:url("./Utils/wood.jpg");
+  border-radius: 25px;
+  width: 40vw;
+  height: 50vh;
+  box-shadow: 0 0 10px;
+  animation: hil 4s linear infinite;
+  padding-bottom: 20px;
+  background-size: 40vw 50vh;
+}
+.inshead{
+  text-align: center;
+  font-size: x-large;
+}
+.info{
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  margin: auto;
+}
+.photu{
+  display: inline-block;
+}
+.maintext{
+  width:30vw;
+  height: auto;
+  text-align: left;
+  display: inline-block;
+  margin-left: 30px;
+  font-style: italic;
+  font-size: 2vw;
+  font-family: cursive;
+}
+#detailname{
+  width: 250px;
+  height: 200px;
+  background-image: url('./Utils/board.png');
+  position: absolute;
+  left: 0;
+  background-size: 250px 200px;
+  bottom: 0;
+}
+#name{
+  position: absolute;
+  bottom:95px;
+  left: 66px;
+  /* height: 40px;
+  width: 100px; */
+                                                
+}
+.name{
+  top: 60vh;
+  right:20vw;
+  height: 35px;
+  width: 110px;
+  font-size: large;
+  border: thin transparent;
+  border-color: transparent;
+  font-family: 'Scratch', sans-serif;   
+  font-size: xx-large; 
+  font-weight: bold;
+  color: #4E3524;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+#detailstart{
+  width: 200px;
+  height: 150px;
+  background-image: url('./Utils/sboard.png');
+  position: absolute;
+  right: 0;
+  background-size: 250px 200px;
+  bottom: 0;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  outline: none;
+  height: 25px;
+  width: 150px;
+}
+
+input:focus {
+  border-color: green;
+}
+
+.start{
+  width: 100px;
+  height: 35px;
+  background-color: transparent;
+  position: absolute;
+  font-family: 'Scratch', sans-serif;   
+  font-size: xx-large; 
+  font-weight: bold;
+  color: #4E3524;
+  text-align: center;
+  right: 28px;
+  top: 35px;
+  cursor: pointer;
+}
+@keyframes jhul {
+  0%{
+    transform: rotateZ(0deg);
+  }
+  25% {transform: rotateZ(10deg);
+  }
+  75% {
+    transform: rotateZ(-10deg);
+  }
+  100%{
+    transform: rotateZ(0deg);
+  }
+}
+@keyframes  hil {
+  0%{
+    transform:translateX(0px) translateY(0px);
+  }
+  25% {transform:translateX(-20px) translateY(-5px);
+  }
+  50%{
+    transform:translateX(0px) translateY(0px);
+  }
+  75% {
+    transform:translateX(20px)  translateY(-5px);
+  }
+  100%{
+    transform:translateX(0px) translateY(0px);
+  }
+}
+
+::placeholder {
+  color: #4E3524;
+  opacity: 1; /* Firefox */
+}
+
