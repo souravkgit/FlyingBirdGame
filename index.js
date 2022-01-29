@@ -6,7 +6,7 @@ var bird = document.getElementById("bird");
 var left = 0;
 var t = 0;
 var sp = 19;
-var wid = window.innerWidth;
+var wid = window.innerWidth - 120;
 var ht = window.innerHeight - 120;
 // console.log(wid, ht);
 const width = window.innerWidth;
@@ -238,14 +238,6 @@ document.addEventListener("keydown", function (e) {
   if (gameover) {
     return;
   }
-  // if (op_d && op_u) {
-  //   return;
-  // }
-  // if ((e.which==87 || e.which==38) && (e.which==40 || e.which==83)){
-  // }
-  // if (e.which==87 && (e.which==40 || e.which==83)){
-  //   return;
-  // }
   op_down = false;
   op_up = false;
   op_left = false;
