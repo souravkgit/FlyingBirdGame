@@ -5,7 +5,7 @@ audio.play();
 var bird = document.getElementById("bird");
 var left = 0;
 var t = 0;
-var sp = 19;
+var sp = 12;
 var wid = window.innerWidth - 120;
 var ht = window.innerHeight - 120;
 // console.log(wid, ht);
@@ -140,12 +140,40 @@ function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
 
 
 
-document.addEventListener("keydown", function (e) {
-  var key = e.which;
-  e.preventDefault();
-  if (gameover) {
-    return;
+
+
+
+var op_down = false;
+var op_up = false;
+var op_left = false;
+var op_right = false;
+var op_d = false;
+var op_u = false;
+var op_l = false;
+var op_r = false;
+
+document.addEventListener("keyup", function (e1) {
+  key = e1.which;
+  if (key == 38 || key == 87) {
+    op_up = true;
+    op_u = false;
   }
+  if (key == 40 || key == 83) {
+    op_down = true;
+    op_d = false;
+  }
+  if (key == 39 || key == 68) {
+    op_right = true;
+    op_r = false;
+  }
+  if (key == 37 || key == 65) {
+    op_left = true;
+    op_l = false;
+  }
+});
+document.addEventListener("keydown", function (e) {
+
+  key = e.which;
   if (gamepaused) {
     switch (key) {
       case 32:
@@ -179,48 +207,6 @@ document.addEventListener("keydown", function (e) {
         }
     }
   }
-});
-
-
-
-
-
-
-
-
-
-
-
-var op_down = false;
-var op_up = false;
-var op_left = false;
-var op_right = false;
-var op_d = false;
-var op_u = false;
-var op_l = false;
-var op_r = false;
-
-document.addEventListener("keyup", function (e1) {
-  key = e1.which;
-  if (key == 38 || key == 87) {
-    op_up = true;
-    op_u = false;
-  }
-  if (key == 40 || key == 83) {
-    op_down = true;
-    op_d = false;
-  }
-  if (key == 39 || key == 68) {
-    op_right = true;
-    op_r = false;
-  }
-  if (key == 37 || key == 65) {
-    op_left = true;
-    op_l = false;
-  }
-});
-document.addEventListener("keydown", function (e) {
-  key = e.which;
   if (e.which == 40 || e.which == 83) {
     op_d = true;
   }
