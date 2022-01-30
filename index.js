@@ -51,6 +51,7 @@ setInterval(() => {
   if (score % 10 == 0 && score != 0) {
     move += 2;
     score += 1;
+    sp += 1;
   }
   if (!gamepaused && !gameover) {
     // document.querySelector('.container').removeAttribute('style');
