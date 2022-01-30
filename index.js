@@ -14,6 +14,8 @@ var move = width * (11 / 2000);
 var wall2pos = -5 * (width / 10);
 var wall1pos = -(width / 10);
 var beepos = -1 * width * Math.max(2, Math.random() * 6);
+var beeycurr=window.innerHeight/2;
+var beeynext=Math.random()*window.innerHeight;
 var score = 0;
 var wall1 = document.querySelector("#wall1");
 var wall2 = document.querySelector("#wall2");
@@ -25,7 +27,8 @@ wall1.style.backgroundSize = 50 + "px " + w1height + "px";
 wall2.style.backgroundSize = 50 + "px " + w2height + "px";
 var gamepaused = false;
 var gameover = false;
-
+var beespd=5;
+var reached=false;
 // let name = "Sourav"
 let name = localStorage.getItem("Name");
 var logos = [
@@ -48,10 +51,28 @@ document.querySelector(".name").innerHTML = name;
 
 //Game Loop
 setInterval(() => {
+  
+  // bee y movement 
+  if((beeynext<beeycurr && beespd >0)||(beeynext>beeycurr && beespd<0)){
+    reached=true;
+  } 
+if(reached){
+  beeynext=Math.random()*window.innerHeight;
+  if(beeynext<beeycurr && beespd >0){
+    beespd =-1*beespd;
+  }
+  if(beeynext>beeycurr && beespd<0){
+    beespd=-1*beespd;
+  }
+  reached=false;
+}
+beeycurr+=beespd;
+document.querySelector('#bee').style.top=beeycurr+'px';
+//----------------------------------------------------
+
   if (score % 10 == 0 && score != 0) {
     move += 2;
     score += 1;
-    sp += 1;
   }
   if (!gamepaused && !gameover) {
     // document.querySelector('.container').removeAttribute('style');
@@ -70,27 +91,12 @@ setInterval(() => {
       beeeat.play();
     }
     //collision with wall
+    var ww1=wall1.getBoundingClientRect();
+    var ww2=wall2.getBoundingClientRect();
+    console.log("positions",ww1.x,ww1.y,ww1.height,ww2.x,ww2.y,ww2.height);
     if (
-      rectIntersect(
-        left + 40,
-        t + 70,
-        120,
-        80,
-        width - wall1pos,
-        0,
-        50,
-        w1height
-      ) ||
-      rectIntersect(
-        left + 40,
-        t + 70,
-        120,
-        80,
-        width - wall2pos,
-        window.innerHeight - w2height,
-        50,
-        w2height
-      )
+      rectIntersect(left + 40,t + 70,120,80,ww1.x,ww1.y,50,w1height) ||
+      rectIntersect(left + 40,t + 70,120,80,ww2.x,ww2.y,50,w2height)
     ) {
       wall1pos = wall1pos = -(width / 10);
       wall2pos = -(width / 2);
@@ -103,6 +109,7 @@ setInterval(() => {
       document.getElementById("gameover").classList.add("pop");
       gameover = true;
     }
+    //------------------------------------------------------------
     if (Math.abs(wall1pos - wall2pos) < 250) {
       wall2pos = -(width / 2);
     }
@@ -110,6 +117,13 @@ setInterval(() => {
       wall1pos = -(width / 10);
       score += 1;
       w1height = Math.max(200, Math.random() * ht * (7 / 10));
+      wall1.removeAttribute('style');
+      if(Math.random()<0.5){
+        wall1.style.top=0;
+      }
+      else{
+        wall1.style.bottom=0;
+      }
       wall1.style.height = w1height + "px";
       wall1.style.backgroundSize = 50 + "px " + w1height + "px";
     }
@@ -117,6 +131,13 @@ setInterval(() => {
       wall2pos = -(width / 2);
       score += 1;
       w2height = Math.max(200, Math.random() * ht * (7 / 10));
+      wall2.removeAttribute('style');
+      if(Math.random()<0.5){
+        wall2.style.top=0;
+      }
+      else{
+        wall2.style.bottom=0;
+      }
       wall2.style.height = w2height + "px";
       wall2.style.backgroundSize = 50 + "px " + w2height + "px";
     }
@@ -138,6 +159,54 @@ function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
 }
 
 //########################################################################################
+
+
+
+document.addEventListener("keydown", function (e) {
+  var key = e.which;
+  e.preventDefault();
+  if (gameover) {
+    return;
+  }
+  if (gamepaused) {
+    switch (key) {
+      case 32:
+        if (gamepaused) {
+          document.querySelector(".pause").style.visibility = "hidden";
+          // console.log("game is pause= ", gamepaused)
+          gamepaused = false;
+          break;
+        } else {
+          document.querySelector(".pause").style.visibility = "visible";
+          // console.log("game is pause= ", gamepaused)
+          gamepaused = true;
+          break;
+        }
+      default:
+        return;
+    }
+  } else {
+    switch (key) {
+      case 32:
+        if (gamepaused) {
+          document.querySelector(".pause").style.visibility = "hidden";
+          // console.log("game is pause= ", gamepaused)
+          gamepaused = false;
+          break;
+        } else {
+          document.querySelector(".pause").style.visibility = "visible";
+          // console.log("game is pause= ", gamepaused)
+          gamepaused = true;
+          break;
+        }
+    }
+  }
+});
+
+
+
+
+
 
 
 
@@ -173,41 +242,10 @@ document.addEventListener("keyup", function (e1) {
   }
 });
 document.addEventListener("keydown", function (e) {
-
-  key = e.which;
-  if (gamepaused) {
-    switch (key) {
-      case 32:
-        if (gamepaused) {
-          document.querySelector(".pause").style.visibility = "hidden";
-          // console.log("game is pause= ", gamepaused)
-          gamepaused = false;
-          break;
-        } else {
-          document.querySelector(".pause").style.visibility = "visible";
-          // console.log("game is pause= ", gamepaused)
-          gamepaused = true;
-          break;
-        }
-      default:
-        return;
-    }
-  } else {
-    switch (key) {
-      case 32:
-        if (gamepaused) {
-          document.querySelector(".pause").style.visibility = "hidden";
-          // console.log("game is pause= ", gamepaused)
-          gamepaused = false;
-          break;
-        } else {
-          document.querySelector(".pause").style.visibility = "visible";
-          // console.log("game is pause= ", gamepaused)
-          gamepaused = true;
-          break;
-        }
-    }
+  if(gamepaused){
+    return;
   }
+  key = e.which;
   if (e.which == 40 || e.which == 83) {
     op_d = true;
   }
