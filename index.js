@@ -243,7 +243,7 @@ document.addEventListener("keydown", function (e) {
       if (op_down) {
         clearInterval(mnc);
       }
-    }, 10);
+    }, 20);
   }
   else if (e.which == 38 || e.which == 87) {
     var mnc1 = setInterval(() => {
@@ -259,7 +259,7 @@ document.addEventListener("keydown", function (e) {
       if (op_up) {
         clearInterval(mnc1);
       }
-    }, 10);
+    }, 20);
   }
   else if (e.which == 39 || e.which == 68) {
     var mnc = setInterval(() => {
@@ -273,7 +273,7 @@ document.addEventListener("keydown", function (e) {
       if (op_right) {
         clearInterval(mnc);
       }
-    }, 10);
+    }, 20);
   }
   else if (e.which == 37 || e.which == 65) {
     var mnc = setInterval(() => {
@@ -287,6 +287,6 @@ document.addEventListener("keydown", function (e) {
       if (op_left) {
         clearInterval(mnc);
       }
-    }, 10);
+    }, 20);
   }
 });
