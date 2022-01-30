@@ -5,7 +5,7 @@ audio.play();
 var bird = document.getElementById("bird");
 var left = 0;
 var t = 0;
-var sp = 12;
+var sp = 15;
 var wid = window.innerWidth - 120;
 var ht = window.innerHeight - 120;
 // console.log(wid, ht);
