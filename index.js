@@ -1,35 +1,34 @@
+//declaring Variables
+
 var audio = new Audio("./Sound/theme1.mp3");
 var out = new Audio("./Sound/out.mp3");
 var beeeat = new Audio("./Sound/bee.mp3");
-audio.play();
 var bird = document.getElementById("bird");
 var left = 0;
 var t = 0;
 var sp = 15;
 var wid = window.innerWidth - 120;
 var ht = window.innerHeight - 120;
-// console.log(wid, ht);
 const width = window.innerWidth;
 var move = width * (11 / 2000);
 var wall2pos = -5 * (width / 10);
 var wall1pos = -(width / 10);
 var beepos = -1 * width * Math.max(2, Math.random() * 6);
-var beeycurr=window.innerHeight/2;
-var beeynext=Math.random()*window.innerHeight;
+var beeycurr = window.innerHeight / 2;
+var beeynext = Math.random() * window.innerHeight;
 var score = 0;
 var wall1 = document.querySelector("#wall1");
 var wall2 = document.querySelector("#wall2");
 var w1height = Math.max(200, Math.random() * ht * (7 / 10));
 var w2height = Math.max(200, Math.random() * ht * (7 / 10));
+var gamepaused = false;
+var gameover = false;
+var beespd = 5;
+var reached = false;
 wall1.style.height = w1height + "px";
 wall2.style.height = w2height + "px";
 wall1.style.backgroundSize = 50 + "px " + w1height + "px";
 wall2.style.backgroundSize = 50 + "px " + w2height + "px";
-var gamepaused = false;
-var gameover = false;
-var beespd=5;
-var reached=false;
-// let name = "Sourav"
 let name = localStorage.getItem("Name");
 var logos = [
   "./Utils/logo1.jpeg",
@@ -44,38 +43,34 @@ var logos = [
   "./Utils/logo10.jpeg",
 ];
 var logo = logos[Math.floor(Math.random() * 9)];
-// console.log(logo);
-
 document.querySelector(".profile").style.backgroundImage = "url(" + logo + ")";
 document.querySelector(".name").innerHTML = name;
-
-//Game Loop
+audio.play();
+// *******************Game Loop*******************************************************
 setInterval(() => {
-  
-  // bee y movement 
-  if((beeynext<beeycurr && beespd >0)||(beeynext>beeycurr && beespd<0)){
-    reached=true;
-  } 
-if(reached){
-  beeynext=Math.random()*window.innerHeight;
-  if(beeynext<beeycurr && beespd >0){
-    beespd =-1*beespd;
+  //movement of bee in y direction 
+  if ((beeynext < beeycurr && beespd > 0) || (beeynext > beeycurr && beespd < 0)) {
+    reached = true;
   }
-  if(beeynext>beeycurr && beespd<0){
-    beespd=-1*beespd;
+  if (reached) {
+    beeynext = Math.random() * window.innerHeight;
+    if (beeynext < beeycurr && beespd > 0) {
+      beespd = -1 * beespd;
+    }
+    if (beeynext > beeycurr && beespd < 0) {
+      beespd = -1 * beespd;
+    }
+    reached = false;
   }
-  reached=false;
-}
-beeycurr+=beespd;
-document.querySelector('#bee').style.top=beeycurr+'px';
-//----------------------------------------------------
+  beeycurr += beespd;
+  document.querySelector('#bee').style.top = beeycurr + 'px';
+  //----------------------------------------------------
 
   if (score % 10 == 0 && score != 0) {
     move += 2;
     score += 1;
   }
   if (!gamepaused && !gameover) {
-    // document.querySelector('.container').removeAttribute('style');
     if (audio.paused) {
       audio.play();
     }
@@ -84,18 +79,21 @@ document.querySelector('#bee').style.top=beeycurr+'px';
     beepos += 0.8 * move;
     document.getElementById("score").innerHTML = "Score : " + score;
     let bee = document.querySelector("#bee").getBoundingClientRect();
-    //collision with bee
+    
+    //collision of jamna with bee
+
     if (rectIntersect(left + 40, t + 70, 120, 80, bee.x, bee.y, 52, 52)) {
       score += 5;
       beepos = -1 * width * Math.max(2, Math.random() * 6);
       beeeat.play();
     }
-    //collision with wall
-    var ww1=wall1.getBoundingClientRect();
-    var ww2=wall2.getBoundingClientRect();
+//collision of jamna with walls
+
+    var ww1 = wall1.getBoundingClientRect();
+    var ww2 = wall2.getBoundingClientRect();
     if (
-      rectIntersect(left + 40,t + 70,120,80,ww1.x,ww1.y,50,w1height) ||
-      rectIntersect(left + 40,t + 70,120,80,ww2.x,ww2.y,50,w2height)
+      rectIntersect(left + 40, t + 70, 120, 80, ww1.x, ww1.y, 50, w1height) ||
+      rectIntersect(left + 40, t + 70, 120, 80, ww2.x, ww2.y, 50, w2height)
     ) {
       wall1pos = wall1pos = -(width / 10);
       wall2pos = -(width / 2);
@@ -108,20 +106,21 @@ document.querySelector('#bee').style.top=beeycurr+'px';
       document.getElementById("gameover").classList.add("pop");
       gameover = true;
     }
-    //------------------------------------------------------------
+//------------------------------------------------------------
     if (Math.abs(wall1pos - wall2pos) < 250) {
       wall2pos = -(width / 2);
     }
+// regenerating walls and bee
     if (wall1pos > width) {
       wall1pos = -(width / 10);
       score += 1;
       w1height = Math.max(200, Math.random() * ht * (7 / 10));
       wall1.removeAttribute('style');
-      if(Math.random()<0.5){
-        wall1.style.top=0;
+      if (Math.random() < 0.5) {
+        wall1.style.top = 0;
       }
-      else{
-        wall1.style.bottom=0;
+      else {
+        wall1.style.bottom = 0;
       }
       wall1.style.height = w1height + "px";
       wall1.style.backgroundSize = 50 + "px " + w1height + "px";
@@ -131,11 +130,11 @@ document.querySelector('#bee').style.top=beeycurr+'px';
       score += 1;
       w2height = Math.max(200, Math.random() * ht * (7 / 10));
       wall2.removeAttribute('style');
-      if(Math.random()<0.5){
-        wall2.style.top=0;
+      if (Math.random() < 0.5) {
+        wall2.style.top = 0;
       }
-      else{
-        wall2.style.bottom=0;
+      else {
+        wall2.style.bottom = 0;
       }
       wall2.style.height = w2height + "px";
       wall2.style.backgroundSize = 50 + "px " + w2height + "px";
@@ -143,6 +142,9 @@ document.querySelector('#bee').style.top=beeycurr+'px';
     if (beepos > width) {
       beepos = -1 * width * Math.max(2, Math.random() * 6);
     }
+
+//movement of walls and bee
+
     document.querySelector("#wall1").style.right = wall1pos + "px";
     document.querySelector("#wall2").style.right = wall2pos + "px";
     document.querySelector("#bee").style.right = beepos + "px";
@@ -150,6 +152,9 @@ document.querySelector('#bee').style.top=beeycurr+'px';
     audio.pause();
   }
 }, 20);
+
+//function to check collision
+
 function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
   if (x2 > w1 + x1 || x1 > w2 + x2 || y2 > h1 + y1 || y1 > h2 + y2) {
     return false;
@@ -158,26 +163,23 @@ function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
 }
 
 //########################################################################################
-
-
-
+// key presing Event listeners
 document.addEventListener("keydown", function (e) {
   var key = e.which;
   e.preventDefault();
   if (gameover) {
     return;
   }
+  // if game paused situation
   if (gamepaused) {
     switch (key) {
       case 32:
         if (gamepaused) {
           document.querySelector(".pause").style.visibility = "hidden";
-          // console.log("game is pause= ", gamepaused)
           gamepaused = false;
           break;
         } else {
           document.querySelector(".pause").style.visibility = "visible";
-          // console.log("game is pause= ", gamepaused)
           gamepaused = true;
           break;
         }
@@ -189,29 +191,16 @@ document.addEventListener("keydown", function (e) {
       case 32:
         if (gamepaused) {
           document.querySelector(".pause").style.visibility = "hidden";
-          // console.log("game is pause= ", gamepaused)
           gamepaused = false;
           break;
         } else {
           document.querySelector(".pause").style.visibility = "visible";
-          // console.log("game is pause= ", gamepaused)
           gamepaused = true;
           break;
         }
     }
   }
 });
-
-
-
-
-
-
-
-
-
-
-
 var op_down = false;
 var op_up = false;
 var op_left = false;
@@ -241,7 +230,7 @@ document.addEventListener("keyup", function (e1) {
   }
 });
 document.addEventListener("keydown", function (e) {
-  if(gamepaused){
+  if (gamepaused) {
     return;
   }
   key = e.which;
@@ -269,13 +258,12 @@ document.addEventListener("keydown", function (e) {
 
   if (e.which == 40 || e.which == 83) {
     var mnc = setInterval(() => {
-      if (op_u && !op_up){
+      if (op_u && !op_up) {
         console.log("Na chalau!");
       }
-      if(op_d && !op_u && t < ht) {
+      if (op_d && !op_u && t < ht) {
         t = t + sp;
         bird.style.top = t + 'px';
-        console.log(t);
       }
 
       if (op_down) {
@@ -285,13 +273,12 @@ document.addEventListener("keydown", function (e) {
   }
   else if (e.which == 38 || e.which == 87) {
     var mnc1 = setInterval(() => {
-      if (op_d && !op_down){
+      if (op_d && !op_down) {
         console.log("Na chalau!");
       }
       if (op_u && !op_d && t >= -40) {
         t = t - sp;
         bird.style.top = t + 'px';
-        console.log(t);
       }
 
       if (op_up) {
@@ -301,7 +288,7 @@ document.addEventListener("keydown", function (e) {
   }
   else if (e.which == 39 || e.which == 68) {
     var mnc = setInterval(() => {
-      if (op_r && !op_right){
+      if (op_r && !op_right) {
         console.log("Na Chalau!");
       }
       if (op_r && !op_l && left <= wid) {
@@ -315,7 +302,7 @@ document.addEventListener("keydown", function (e) {
   }
   else if (e.which == 37 || e.which == 65) {
     var mnc = setInterval(() => {
-      if (op_l && !op_left){
+      if (op_l && !op_left) {
         console.log("Na Chalau!");
       }
       if (op_l && !op_r && left > 0) {
@@ -328,3 +315,4 @@ document.addEventListener("keydown", function (e) {
     }, 20);
   }
 });
+// Thats it
