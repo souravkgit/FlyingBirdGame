@@ -93,7 +93,6 @@ document.querySelector('#bee').style.top=beeycurr+'px';
     //collision with wall
     var ww1=wall1.getBoundingClientRect();
     var ww2=wall2.getBoundingClientRect();
-    console.log("positions",ww1.x,ww1.y,ww1.height,ww2.x,ww2.y,ww2.height);
     if (
       rectIntersect(left + 40,t + 70,120,80,ww1.x,ww1.y,50,w1height) ||
       rectIntersect(left + 40,t + 70,120,80,ww2.x,ww2.y,50,w2height)
