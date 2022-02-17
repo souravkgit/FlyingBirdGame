@@ -1,9 +1,13 @@
 //declaring Variables
 
-var audio = new Audio("./Sound/theme1.mp3");
+var audio = new Audio("./Sound/theme.mp3");
 var out = new Audio("./Sound/out.mp3");
 var beeeat = new Audio("./Sound/bee.mp3");
 var bird = document.getElementById("bird");
+function codeAddress() {
+  audio.play();
+}
+window.onload = codeAddress;
 var left = 0;
 var t = 0;
 var sp = 15;
@@ -258,9 +262,6 @@ document.addEventListener("keydown", function (e) {
 
   if (e.which == 40 || e.which == 83) {
     var mnc = setInterval(() => {
-      if (op_u && !op_up) {
-        console.log("Na chalau!");
-      }
       if (op_d && !op_u && t < ht) {
         t = t + sp;
         bird.style.top = t + 'px';
@@ -273,9 +274,6 @@ document.addEventListener("keydown", function (e) {
   }
   else if (e.which == 38 || e.which == 87) {
     var mnc1 = setInterval(() => {
-      if (op_d && !op_down) {
-        console.log("Na chalau!");
-      }
       if (op_u && !op_d && t >= -40) {
         t = t - sp;
         bird.style.top = t + 'px';
@@ -288,9 +286,6 @@ document.addEventListener("keydown", function (e) {
   }
   else if (e.which == 39 || e.which == 68) {
     var mnc = setInterval(() => {
-      if (op_r && !op_right) {
-        console.log("Na Chalau!");
-      }
       if (op_r && !op_l && left <= wid) {
         left = left + sp;
         bird.style.left = left + 'px';
@@ -302,9 +297,6 @@ document.addEventListener("keydown", function (e) {
   }
   else if (e.which == 37 || e.which == 65) {
     var mnc = setInterval(() => {
-      if (op_l && !op_left) {
-        console.log("Na Chalau!");
-      }
       if (op_l && !op_r && left > 0) {
         left = left - sp;
         bird.style.left = left + 'px';
