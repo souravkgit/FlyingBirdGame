@@ -4,10 +4,10 @@ var audio = new Audio("./Sound/theme.mp3");
 var out = new Audio("./Sound/out.mp3");
 var beeeat = new Audio("./Sound/bee.mp3");
 var bird = document.getElementById("bird");
-function codeAddress() {
+function sound() {
   audio.play();
 }
-window.onload = codeAddress;
+window.onload = sound;
 var left = 0;
 var t = 0;
 var sp = 15;
@@ -49,7 +49,6 @@ var logos = [
 var logo = logos[Math.floor(Math.random() * 9)];
 document.querySelector(".profile").style.backgroundImage = "url(" + logo + ")";
 document.querySelector(".name").innerHTML = name;
-audio.play();
 // *******************Game Loop*******************************************************
 setInterval(() => {
   //movement of bee in y direction 
